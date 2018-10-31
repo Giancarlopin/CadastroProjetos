@@ -38,6 +38,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCidades = new javax.swing.JMenuItem();
         menuClientes = new javax.swing.JMenuItem();
         menuUsuarios = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         JSair = new javax.swing.JMenu();
         menuSair = new javax.swing.JMenuItem();
 
@@ -97,6 +98,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(menuUsuarios);
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/projet.png"))); // NOI18N
+        jMenuItem1.setLabel("Projetos");
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
         JSair.setText("Sair");
@@ -150,6 +155,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void menuUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUsuariosActionPerformed
         // TODO add your handling code here:
+        FuncionarioView fv = new FuncionarioView();
+        fv.setVisible(true);
     }//GEN-LAST:event_menuUsuariosActionPerformed
 
     private void JSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JSairMouseClicked
@@ -203,6 +210,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem menuCidades;
     private javax.swing.JMenuItem menuClientes;

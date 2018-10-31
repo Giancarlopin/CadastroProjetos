@@ -18,11 +18,11 @@ public class Funcionario {
     private String cargo;
     private int codcidade;
 
-    public int getCodfuncionario() {
+    public int getCodFuncionario() {
         return codfuncionario;
     }
 
-    public void setCodfuncionario(int codfuncionario) {
+    public void setCodFuncionario(int codfuncionario) {
         this.codfuncionario = codfuncionario;
     }
 
