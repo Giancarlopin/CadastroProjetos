@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioFuncionarios" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cefdec4f-2ce0-4cec-b131-d0fbbe5cc37c">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="19"/>
+	<property name="ireport.y" value="76"/>
+	<parameter name="PR_CIDADE" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select f.*, c.nome as nmcidade from funcionario f  INNER JOIN cidade c ON c.codcidade = f.codcidade]]>
+	</queryString>
+	<field name="codfuncionario" class="java.lang.Integer"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="cpf" class="java.lang.String"/>
+	<field name="telefone" class="java.lang.String"/>
+	<field name="cargo" class="java.lang.String"/>
+	<field name="codcidade" class="java.lang.Integer"/>
+	<field name="nmcidade" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="59" width="38" height="20" uuid="547a5eef-32eb-4a9a-8ea8-f8a89697d328"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cidade:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="38" y="59" width="100" height="20" uuid="272306d8-a53a-4109-9344-c504d2938e81"/>
+				<textFieldExpression><![CDATA[$P{PR_CIDADE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="10" width="549" height="33" uuid="4e152a9a-836d-4e3d-9c70-4ee7c108e67a"/>
+				<textElement textAlignment="Center">
+					<font size="22" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Relatório Funcionários]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="14" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="6" y="10" width="32" height="31" uuid="e347b237-dc09-4236-957e-bf64550e47dc"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cód]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="65" y="10" width="154" height="31" uuid="e52b78dc-2298-4a9b-99c4-8d1e6645ea1f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="10" width="99" height="31" uuid="7837afda-6766-4171-a9c8-93f26660bc04"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="332" y="10" width="100" height="31" uuid="d9206dc6-0c7f-4b84-acfc-bbf52ea8c034"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="10" width="100" height="31" uuid="084ced68-0b20-4f13-b9b8-02a012e374e4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cidade]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-20" y="9" width="575" height="1" uuid="e7ab991d-f732-4b97-99cd-5b871452a9ba"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="42" height="20" uuid="2d68ccc4-8740-4aba-bc1f-53fc1a261003"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{codfuncionario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="65" y="0" width="154" height="20" uuid="4b54ea78-24be-4f7a-be60-8461d52cf32f"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="332" y="0" width="100" height="20" uuid="b106ed53-2e25-46a7-80ff-c0a946fc091a"/>
+				<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="36496f49-a2d0-4911-aca6-92e3e35f6c44"/>
+				<textFieldExpression><![CDATA[$F{nmcidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="219" y="0" width="100" height="20" uuid="200a50bd-3c9e-4b0e-ae03-98eb8dbee9c1"/>
+				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="f8d822b6-2ed5-4f2d-bcea-c8e14fdaedc0"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="455" y="34" width="64" height="20" uuid="d42b2d91-a32c-49c1-aa88-6d1c78aa4d04"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Registros:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="519" y="34" width="36" height="20" uuid="ed73b56b-5264-4fd3-95ce-7ea19f00f1b8"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

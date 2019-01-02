@@ -5,7 +5,15 @@
  */
 package view;
 
+import controller.RelatorioController;
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -35,10 +43,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        menuCidades = new javax.swing.JMenuItem();
-        menuClientes = new javax.swing.JMenuItem();
-        menuUsuarios = new javax.swing.JMenuItem();
+        jcidade = new javax.swing.JMenuItem();
+        jcliente = new javax.swing.JMenuItem();
+        jfuncionario = new javax.swing.JMenuItem();
+        jprojeto = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         JSair = new javax.swing.JMenu();
         menuSair = new javax.swing.JMenuItem();
 
@@ -68,41 +81,85 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuBar1.setBackground(new java.awt.Color(204, 204, 255));
         jMenuBar1.setPreferredSize(new java.awt.Dimension(88, 35));
 
-        jMenu1.setText("Cadastros");
+        jMenu1.setText("Cadastro");
 
-        menuCidades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/mansion.png"))); // NOI18N
-        menuCidades.setText("Cidades");
-        menuCidades.addActionListener(new java.awt.event.ActionListener() {
+        jcidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/mansion.png"))); // NOI18N
+        jcidade.setText("Cidades");
+        jcidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuCidadesActionPerformed(evt);
+                jcidadeActionPerformed(evt);
             }
         });
-        jMenu1.add(menuCidades);
+        jMenu1.add(jcidade);
 
-        menuClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/clientes.png"))); // NOI18N
-        menuClientes.setText("Clientes");
-        menuClientes.addActionListener(new java.awt.event.ActionListener() {
+        jcliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/clientes.png"))); // NOI18N
+        jcliente.setText("Clientes");
+        jcliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuClientesActionPerformed(evt);
+                jclienteActionPerformed(evt);
             }
         });
-        jMenu1.add(menuClientes);
+        jMenu1.add(jcliente);
 
-        menuUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/man.png"))); // NOI18N
-        menuUsuarios.setText("Funcionários");
-        menuUsuarios.setToolTipText("");
-        menuUsuarios.addActionListener(new java.awt.event.ActionListener() {
+        jfuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/man.png"))); // NOI18N
+        jfuncionario.setText("Funcionarios");
+        jfuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuUsuariosActionPerformed(evt);
+                jfuncionarioActionPerformed(evt);
             }
         });
-        jMenu1.add(menuUsuarios);
+        jMenu1.add(jfuncionario);
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/projet.png"))); // NOI18N
-        jMenuItem1.setLabel("Projetos");
+        jprojeto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/projet.png"))); // NOI18N
+        jprojeto.setText("Projetos");
+        jprojeto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jprojetoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jprojeto);
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/login.png"))); // NOI18N
+        jMenuItem1.setText("Usuários");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Relatórios");
+
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/relatorio.png"))); // NOI18N
+        jMenuItem2.setText("Relatório Funcionários");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/relatorio.png"))); // NOI18N
+        jMenuItem4.setText("Relatório Clientes");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem4);
+
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/relatorio.png"))); // NOI18N
+        jMenuItem3.setText("Relatório Projetos");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu2);
 
         JSair.setText("Sair");
         JSair.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -169,6 +226,67 @@ public class TelaPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_menuSairActionPerformed
 
+    private void jcidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcidadeActionPerformed
+        // TODO add your handling code here:
+        CidadeView cidade = new CidadeView();
+        cidade.setVisible(true);
+    }//GEN-LAST:event_jcidadeActionPerformed
+
+    private void jclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jclienteActionPerformed
+        // TODO add your handling code here:
+        ClienteView cliente = new ClienteView();
+        cliente.setVisible(true);
+    }//GEN-LAST:event_jclienteActionPerformed
+
+    private void jfuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jfuncionarioActionPerformed
+        // TODO add your handling code here:
+        FuncionarioView funcionario = new FuncionarioView();
+        funcionario.setVisible(true);
+    }//GEN-LAST:event_jfuncionarioActionPerformed
+
+    private void jprojetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jprojetoActionPerformed
+        // TODO add your handling code here:
+        ProjetoView projeto = new ProjetoView();
+        projeto.setVisible(true);
+        
+    }//GEN-LAST:event_jprojetoActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        relFuncionariosView rvf = new relFuncionariosView();
+        rvf.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        try {
+            Map<String,Object> parametros = new HashMap<String,Object>();
+            RelatorioController objController = new RelatorioController();
+            String wSQL = " select cl.*, c.nome as nmcidade from clientes cl "
+                    + " INNER JOIN cidade c ON c.codcidade = cl.codcidade ";
+
+            ResultSet resultSet = objController.buscarRelatorio(wSQL);//Buscar os dados do relatório
+            JRResultSetDataSource relResult = new JRResultSetDataSource(resultSet);//Passa um resultSet para a fonte de dados do relatório
+            JasperPrint jpPrint = JasperFillManager.fillReport("ireport/RelatorioClientes.jasper",parametros, relResult);//Prepara o relatório para ser impresso, recebe o gerenciador JASPER
+            JasperViewer jpViewer = new JasperViewer(jpPrint, false); //
+            jpViewer.setVisible(true);//abre o relatório para visualização
+            jpViewer.toFront();//define o form a frente da aplicação
+        }catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        
+        UsuariosView usuario = new UsuariosView();
+        usuario.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -209,12 +327,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu JSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JMenuItem menuCidades;
-    private javax.swing.JMenuItem menuClientes;
+    private javax.swing.JMenuItem jcidade;
+    private javax.swing.JMenuItem jcliente;
+    private javax.swing.JMenuItem jfuncionario;
+    private javax.swing.JMenuItem jprojeto;
     private javax.swing.JMenuItem menuSair;
-    private javax.swing.JMenuItem menuUsuarios;
     // End of variables declaration//GEN-END:variables
 }

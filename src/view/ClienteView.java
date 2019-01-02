@@ -499,6 +499,7 @@ public class ClienteView extends javax.swing.JFrame {
             txtDescricao.setText("");
             txtTelefone.setText("");
             jcbCidades.setSelectedIndex(0);
+            txtNome.grabFocus();
             
             Formatacao.reformatarTelefone(txtTelefone);
             tppessoagroup.clearSelection();

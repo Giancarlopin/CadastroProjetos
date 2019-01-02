@@ -53,9 +53,9 @@ public class ProjetoController {
        try {
 
             String SQL = "";
-            SQL = " SELECT p.codprojeto, p.nmprojeto, p.dsprojeto, p.dtinicio, p.difim, e.codprojeto";
-            SQL += " FROM projeto p, equipe e";
-            SQL += " WHERE p.codprojeto = e.codprojeto";
+            SQL = " SELECT p.codprojeto, p.nmprojeto, p.dsprojeto, p.dtinicio, p.dtfim, p.situacao";
+            SQL += " FROM projeto p";
+    
             
             result = ConnectionFactory.stmt.executeQuery(SQL);
 
@@ -146,10 +146,9 @@ public class ProjetoController {
             ResultSet rs = null;
 
             String SQL = "";
-            SQL = " SELECT f.codfuncionario, f.nome, f.cpf, f.telefone, f.cargo, f.codcidade";
-            SQL += " FROM funcionario f, cidade ci";
-            SQL += " WHERE f.codcidade = ci.codcidade";
-            SQL += " AND codfuncionario= '" + id + "'";
+            SQL = " SELECT p.codprojeto, p.nmprojeto, p.dsprojeto, p.dtinicio, p.dtfim, p.situacao";
+            SQL += " FROM projeto p";
+            SQL += " WHERE codprojeto= '" + id + "'";
 
             try{
                 System.out.println("Vai Executar Conexão em buscar Equipe");
@@ -191,13 +190,16 @@ public class ProjetoController {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("INSERT INTO projeto (nmprojeto, dsprojeto, dtinicio, dtfim, situacao) VALUES (?,?,?,?,?)");
+            /*stmt = con.prepareStatement("INSERT INTO projeto (nmprojeto, dsprojeto, dtinicio, dtfim, situacao) VALUES (?,?,?,?,?)");
             stmt.setString(1, objProjeto.getNmProjeto());
             stmt.setString(2, objProjeto.getDsProjeto());
             stmt.setString(3, objProjeto.getDtIncio());
             stmt.setString(4, objProjeto.getDtFim());
-            stmt.setString(5,String.valueOf(objProjeto.getSituacao()) );
+            stmt.setString(5,String.valueOf(objProjeto.getSituacao()) );*/
             
+            stmt = con.prepareStatement("INSERT INTO projeto (nmprojeto, dsprojeto) VALUES (?,?)");
+            stmt.setString(1, objProjeto.getNmProjeto());
+            stmt.setString(2, objProjeto.getDsProjeto());
             
             stmt.executeUpdate();
             
@@ -218,13 +220,17 @@ public class ProjetoController {
         PreparedStatement stmt = null;
         
         try {        
-            stmt = con.prepareStatement("UPDATE projeto SET nmprojeto=?, dsprojeto=?,dtfim=?, situacao=? WHERE codprojeto=?");
+          /* stmt = con.prepareStatement("UPDATE projeto SET nmprojeto=?, dsprojeto=?,dtfim=?, situacao=? WHERE codprojeto=?");
             stmt.setString(1, objProjeto.getNmProjeto());
             stmt.setString(2, objProjeto.getDsProjeto());
             stmt.setString(3, objProjeto.getDtFim());
-            stmt.setString(4, objProjeto.getSituacao());;
+            stmt.setString(4, objProjeto.getSituacao());
 
-            stmt.setInt(5, objProjeto.getCodProjeto());
+            stmt.setInt(5, objProjeto.getCodProjeto());*/
+            stmt = con.prepareStatement("UPDATE projeto SET nmprojeto=?, dsprojeto=? WHERE codprojeto=?");
+            stmt.setString(1, objProjeto.getNmProjeto());
+            stmt.setString(2, objProjeto.getDsProjeto());
+            stmt.setInt(3, objProjeto.getCodProjeto());
             
             stmt.executeUpdate();
             

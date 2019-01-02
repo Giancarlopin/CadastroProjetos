@@ -5,8 +5,8 @@
  */
 package view;
 
-import controller.FuncionarioController;
-import controller.ClienteController;
+
+import controller.ProjetoController;
 import java.awt.Color;
 import java.sql.Date;
 import java.text.DateFormat;
@@ -17,8 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
-import model.Cidade;
-import model.Funcionario;
+import model.Projeto;
 import tools.Combos;
 import tools.*;
 
@@ -26,15 +25,15 @@ import tools.*;
  *
  * @author jonasdhein
  */
-public class FuncionarioView extends javax.swing.JFrame {
+public class ProjetoView extends javax.swing.JFrame {
 
     /**
      * Creates new form ViewAlunos
      */
-    Funcionario objFuncionario;
+    Projeto objProjeto;
     Combos cbCidade;
     
-    public FuncionarioView() {
+    public ProjetoView() {
         initComponents();
         
         try{
@@ -47,12 +46,9 @@ public class FuncionarioView extends javax.swing.JFrame {
             this.getContentPane().setBackground(Color.WHITE);
             
             //SETA A BARRA LATERAL DA JTABLE
-            jScrollPane2.setViewportView(jtbFuncionario);
+            jScrollPane2.setViewportView(jtbProjeto);
 
-            //carregar as cidades
-            cbCidade= new Combos(jcbCidades);
-            cbCidade.PreencheCombo("SELECT codcidade, nome FROM cidade ORDER BY nome");
-            
+                        
         }catch(Exception ex){
             System.out.println("Erro ao atualizar os dados inicias da tela");
         }
@@ -71,13 +67,12 @@ public class FuncionarioView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         tppessoagroup = new javax.swing.ButtonGroup();
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        lblCpf = new javax.swing.JLabel();
-        lblCidade = new javax.swing.JLabel();
+        lbldtfim = new javax.swing.JLabel();
+        lblequipe = new javax.swing.JLabel();
         lblCodigo = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JFormattedTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jtbFuncionario = new javax.swing.JTable();
+        jtbProjeto = new javax.swing.JTable();
         btnIncluir = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
@@ -85,14 +80,16 @@ public class FuncionarioView extends javax.swing.JFrame {
         txtNome = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        lblcargo = new javax.swing.JLabel();
-        txtTelefone = new javax.swing.JFormattedTextField();
-        lblTelefone = new javax.swing.JLabel();
+        lblDescricao = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtDescricao = new javax.swing.JTextArea();
+        txtdtinicio = new javax.swing.JFormattedTextField();
+        lblinicio = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
-        jcbCidades = new javax.swing.JComboBox<>();
-        txtCpf = new javax.swing.JFormattedTextField();
+        txtdtfim = new javax.swing.JFormattedTextField();
         lblNome = new javax.swing.JLabel();
-        txtCargo = new javax.swing.JFormattedTextField();
+        lblvalor = new javax.swing.JLabel();
+        txtvalor = new javax.swing.JFormattedTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -115,19 +112,13 @@ public class FuncionarioView extends javax.swing.JFrame {
             }
         });
 
-        lblCpf.setText("CPF");
+        lbldtfim.setText("Data Fim:");
 
-        lblCidade.setText("Cidade:");
+        lblequipe.setText("Equipe:");
 
-        lblCodigo.setText("Código");
+        lblCodigo.setText("Código:");
 
-        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoActionPerformed(evt);
-            }
-        });
-
-        jtbFuncionario.setModel(new javax.swing.table.DefaultTableModel(
+        jtbProjeto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -138,18 +129,18 @@ public class FuncionarioView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jtbFuncionario.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jtbFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtbProjeto.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jtbProjeto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtbFuncionarioMouseClicked(evt);
+                jtbProjetoMouseClicked(evt);
             }
         });
-        jtbFuncionario.addKeyListener(new java.awt.event.KeyAdapter() {
+        jtbProjeto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jtbFuncionarioKeyPressed(evt);
+                jtbProjetoKeyPressed(evt);
             }
         });
-        jScrollPane2.setViewportView(jtbFuncionario);
+        jScrollPane2.setViewportView(jtbProjeto);
 
         btnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-add.png"))); // NOI18N
         btnIncluir.setText("Incluir");
@@ -183,25 +174,23 @@ public class FuncionarioView extends javax.swing.JFrame {
             }
         });
 
-        txtNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeActionPerformed(evt);
-            }
-        });
-
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Funcionarios");
+        jLabel5.setText("Projetos");
 
-        lblcargo.setText("Cargo: ");
+        lblDescricao.setText("Descrição:");
 
-        txtTelefone.addActionListener(new java.awt.event.ActionListener() {
+        txtDescricao.setColumns(20);
+        txtDescricao.setRows(5);
+        jScrollPane3.setViewportView(txtDescricao);
+
+        txtdtinicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefoneActionPerformed(evt);
+                txtdtinicioActionPerformed(evt);
             }
         });
 
-        lblTelefone.setText("Telefone:");
+        lblinicio.setText("Data Incio:");
 
         btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-right.png"))); // NOI18N
         btnVoltar.setText("Voltar");
@@ -211,13 +200,19 @@ public class FuncionarioView extends javax.swing.JFrame {
             }
         });
 
-        jcbCidades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtdtfim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtdtfimActionPerformed(evt);
+            }
+        });
 
         lblNome.setText("Nome:");
 
-        txtCargo.addActionListener(new java.awt.event.ActionListener() {
+        lblvalor.setText("Valor:");
+
+        txtvalor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCargoActionPerformed(evt);
+                txtvalorActionPerformed(evt);
             }
         });
 
@@ -226,39 +221,40 @@ public class FuncionarioView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCodigo)
-                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTelefone))
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane3)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCpf)
-                                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCidade)
-                                    .addComponent(jcbCidades, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblNome))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(13, 13, 13)
-                                        .addComponent(lblcargo))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblCodigo)
+                                            .addComponent(txtdtinicio, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblinicio))
+                                        .addGap(32, 32, 32)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(lblNome)
+                                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(lblequipe)
+                                                .addGap(26, 26, 26))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(txtdtfim, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(lbldtfim))
+                                                .addGap(32, 32, 32)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(lblvalor)
+                                                    .addComponent(txtvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addComponent(lblDescricao))
+                                .addGap(138, 138, 138)))
+                        .addGap(34, 34, 34))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnIncluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -267,8 +263,15 @@ public class FuncionarioView extends javax.swing.JFrame {
                         .addComponent(btnExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLimpar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
-                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -280,38 +283,40 @@ public class FuncionarioView extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodigo)
                     .addComponent(lblNome)
-                    .addComponent(lblcargo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblequipe))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCidade)
-                            .addComponent(lblCpf)
-                            .addComponent(lblTelefone))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblinicio, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbCidades, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbldtfim)
+                            .addComponent(lblvalor))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtdtinicio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtdtfim, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIncluir)
                     .addComponent(btnAlterar)
                     .addComponent(btnExcluir)
                     .addComponent(btnLimpar)
                     .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
         );
 
         pack();
@@ -322,34 +327,34 @@ public class FuncionarioView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_formMouseClicked
 
-    private void jtbFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbFuncionarioMouseClicked
+    private void jtbProjetoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbProjetoMouseClicked
         // TODO add your handling code here:
         //pega a linha selecionada
-         int linhaSelecionada = jtbFuncionario.getSelectedRow();
+         int linhaSelecionada = jtbProjeto.getSelectedRow();
          // Primeira coluna da linha que é o código
-         String coluna1 = jtbFuncionario.getModel().getValueAt(linhaSelecionada, 0).toString();
+         String coluna1 = jtbProjeto.getModel().getValueAt(linhaSelecionada, 0).toString();
          //System.out.println(coluna1);
-         objFuncionario = new Funcionario();
-         FuncionarioController objFuncionarioCon = new FuncionarioController(objFuncionario, null);
-         objFuncionario = objFuncionarioCon.buscar(coluna1);
+         objProjeto = new Projeto();
+         ProjetoController objProjetoCon = new ProjetoController(objProjeto, null);
+         objProjeto = objProjetoCon.buscar(coluna1);
          
          preencheCampos(); 
-    }//GEN-LAST:event_jtbFuncionarioMouseClicked
+    }//GEN-LAST:event_jtbProjetoMouseClicked
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
      
         
         if (validarDados() == true) {
-        
+            //PREENCHE O OBJETO Projeto
             guardarDados();
 
-             FuncionarioController objFuncionarioCon = new FuncionarioController(objFuncionario, null);
+             ProjetoController objProjetoCon = new ProjetoController(objProjeto, null);
             try {
-                if (objFuncionarioCon.incluir() == true) {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Funcionario incluido com sucesso!");
+                if (objProjetoCon.incluir() == true) {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Projeto incluido com sucesso!");
                     atualizarTabela();
                 } else {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir Funcionario!");
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir Projeto!");
                 }
             } catch (Exception ex) {
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
@@ -371,12 +376,12 @@ public class FuncionarioView extends javax.swing.JFrame {
 
                 guardarDados();
 
-                FuncionarioController objFuncionarioCon = new FuncionarioController(objFuncionario, null);
-                if (objFuncionarioCon.alterar() == true) {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Funcionario alterado com Sucesso!");
+                ProjetoController objProjetoCon = new ProjetoController(objProjeto, null);
+                if (objProjetoCon.alterar() == true) {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Projeto alterado com Sucesso!");
                     atualizarTabela();
                 } else {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao alterar Funcionario");
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao alterar Projeto");
                 }
 
                 limparTela();
@@ -395,14 +400,14 @@ public class FuncionarioView extends javax.swing.JFrame {
        if (validarLinha() == true) {
          boolean pergunta = CaixaDeDialogo.obterinstancia().pedirConfirmacao("Você realmente deseja remover este registro?", "Atenção", 'p');
          if (pergunta == true) {
-       String codfuncionario = txtCodigo.getText();
-       FuncionarioController objFuncionarioCon = new FuncionarioController(null, null);
+       String codprojeto = txtCodigo.getText();
+       ProjetoController objProjetoCon = new ProjetoController(null, null);
         try {
-            if (objFuncionarioCon.excluir(codfuncionario) == true) {
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Funcionario removido com Sucesso!");
+            if (objProjetoCon.excluir(codprojeto) == true) {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Projeto removido com Sucesso!");
                 atualizarTabela();
             } else {
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao remover Funcionario!");
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao remover Projeto!");
             }
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
@@ -423,27 +428,22 @@ public class FuncionarioView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void jtbFuncionarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtbFuncionarioKeyPressed
+    private void jtbProjetoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtbProjetoKeyPressed
         // TODO add your handling code here:
-         jtbFuncionarioMouseClicked(null);
-    }//GEN-LAST:event_jtbFuncionarioKeyPressed
+         jtbProjetoMouseClicked(null);
+    }//GEN-LAST:event_jtbProjetoKeyPressed
 
-    private void txtCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCargoActionPerformed
-        // TODO add your handling code here:        
-        
-    }//GEN-LAST:event_txtCargoActionPerformed
-
-    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
+    private void txtdtfimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdtfimActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeActionPerformed
+    }//GEN-LAST:event_txtdtfimActionPerformed
 
-    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+    private void txtdtinicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdtinicioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoActionPerformed
+    }//GEN-LAST:event_txtdtinicioActionPerformed
 
-    private void txtTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefoneActionPerformed
+    private void txtvalorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtvalorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefoneActionPerformed
+    }//GEN-LAST:event_txtvalorActionPerformed
 
      private void limparTela() {
         try {
@@ -452,29 +452,22 @@ public class FuncionarioView extends javax.swing.JFrame {
             
             //LIMPAR OS CAMPOS DA TELA
 
-            txtCpf.setFormatterFactory(null);
+            txtdtfim.setFormatterFactory(null);
             
             txtCodigo.setText("");
-            txtCpf.setText("");
+            Formatacao.colocaMascara(txtdtfim, "##/##/####");
+            Formatacao.colocaMascara(txtdtinicio, "##/##/####");
             txtNome.setText("");
-            txtCargo.setText("");
-            txtTelefone.setText("");
-            jcbCidades.setSelectedIndex(0);
+            txtDescricao.setText("");
+            txtdtinicio.setText("");
             txtNome.grabFocus();
             
-            // TODO add your handling code here:
-                 MaskFormatter CPFMask;
-        
-            try { 
-            CPFMask = new MaskFormatter("###.###.###-##");
-            txtCpf.setValue(null); 
-            txtCpf.setFormatterFactory(new DefaultFormatterFactory(CPFMask));
-
-             } catch (ParseException ex) {
-               System.out.println("Erro ao formatar CPF!");
-            }
             
-            Formatacao.reformatarTelefone(txtTelefone);
+    
+            tppessoagroup.clearSelection();
+  
+
+ 
             tppessoagroup.clearSelection();
             
             
@@ -486,8 +479,8 @@ public class FuncionarioView extends javax.swing.JFrame {
      private void atualizarTabela() {
            try{
             
-            FuncionarioController objFuncionarioCon = new FuncionarioController(null, jtbFuncionario);
-            objFuncionarioCon.preencheFuncionario();
+            ProjetoController objProjetoCon = new ProjetoController(null, jtbProjeto);
+            objProjetoCon.preencheProjeto();
             
         }catch(Exception ex){
             System.out.println("Erro ao atualizar os dados inicias da tela");
@@ -495,7 +488,7 @@ public class FuncionarioView extends javax.swing.JFrame {
      }
      
       private boolean validarLinha () {
-      int linha = jtbFuncionario.getSelectedRow();
+      int linha = jtbProjeto.getSelectedRow();
       
       try {
         if (linha<0) {
@@ -511,19 +504,17 @@ public class FuncionarioView extends javax.swing.JFrame {
       
         private void guardarDados() {
         try {           
-            if (objFuncionario == null) {
-                objFuncionario = new Funcionario();
+            if (objProjeto == null) {
+                objProjeto = new Projeto();
             }
             
-            objFuncionario.setNome(txtNome.getText().toUpperCase());
-            objFuncionario.setCargo(txtCargo.getText());
-            objFuncionario.setTelefone(txtTelefone.getText());
-            objFuncionario.setCpf(txtCpf.getText());
+            objProjeto.setNmProjeto(txtNome.getText().toUpperCase());
+            objProjeto.setDsProjeto(txtDescricao.getText());
+            String datainicioformat = Formatacao.ajustaDataAMD(txtdtinicio.getText());
+            objProjeto.setDtIncio(datainicioformat);
+            String datafimformat = Formatacao.ajustaDataAMD(txtdtfim.getText());
+            objProjeto.setDtFim(datafimformat);
 
-            //RECUPERANDO O CODIGO DO CURSO DO JCOMBOBOX
-            Combos c = (Combos) jcbCidades.getSelectedItem();
-            String codigoCidade = c.getCodigo();
-            objFuncionario.setCodcidade(Integer.parseInt(codigoCidade));
 
             
         }catch(Exception ex){
@@ -533,16 +524,11 @@ public class FuncionarioView extends javax.swing.JFrame {
         
          private void preencheCampos() {
         try {
-            if (objFuncionario.getCpf().length() == 14) {
-            } 
-            txtCodigo.setText(String.valueOf(objFuncionario.getCodFuncionario()));
-            txtCpf.setText(objFuncionario.getCpf());
-            txtNome.setText(objFuncionario.getNome());
-            txtTelefone.setText(objFuncionario.getTelefone());
-            txtCargo.setText(objFuncionario.getCargo());
             
-            //VENDO QUAL ITEM FOI SELECIONADO DA COMBOBOX
-            cbCidade.SetaComboBox(String.valueOf(objFuncionario.getCodcidade()));
+            txtCodigo.setText(String.valueOf(objProjeto.getCodProjeto()));
+            txtNome.setText(objProjeto.getNmProjeto());
+            txtDescricao.setText(objProjeto.getDsProjeto());
+            
  
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro no prencheCampos " + ex.getMessage());
@@ -553,18 +539,14 @@ public class FuncionarioView extends javax.swing.JFrame {
         try {   
           if(    
              //VALIDA OS CAMPOS DA TELA     
-             txtCpf.getText().trim().equals("") ||
+
              txtNome.getText().trim().equals("") ||
-             txtTelefone.getText().trim().equals("") ||
-             txtCargo.getText().trim().equals("") ||
-             ((txtCpf.getText().trim().length() <14) ) ||
-             Validacao.validarTelefone(txtTelefone) == false ||
-                  
-                  
-             //VALIDA SE A COMBOBOX ESTÁ SELECIONADA CORRETAMENTE   
-             jcbCidades.getSelectedIndex() == 0)  {        
+             txtDescricao.getText().trim().equals("")) {
+
+                                   
              return false;
            }
+
            
             return true;
         } catch (Exception ex) {
@@ -607,7 +589,7 @@ public class FuncionarioView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CidadeView().setVisible(true);
+                new ProjetoView().setVisible(true);
             }
         });
     }
@@ -618,25 +600,26 @@ public class FuncionarioView extends javax.swing.JFrame {
     private javax.swing.JButton btnIncluir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JComboBox<String> jcbCidades;
-    private javax.swing.JTable jtbFuncionario;
-    private javax.swing.JLabel lblCidade;
+    private javax.swing.JTable jtbProjeto;
     private javax.swing.JLabel lblCodigo;
-    private javax.swing.JLabel lblCpf;
+    private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblTelefone;
-    private javax.swing.JLabel lblcargo;
+    private javax.swing.JLabel lbldtfim;
+    private javax.swing.JLabel lblequipe;
+    private javax.swing.JLabel lblinicio;
+    private javax.swing.JLabel lblvalor;
     private javax.swing.ButtonGroup tppessoagroup;
-    private javax.swing.JFormattedTextField txtCargo;
     private javax.swing.JFormattedTextField txtCodigo;
-    private javax.swing.JFormattedTextField txtCpf;
+    private javax.swing.JTextArea txtDescricao;
     private javax.swing.JFormattedTextField txtNome;
-    private javax.swing.JFormattedTextField txtTelefone;
+    private javax.swing.JFormattedTextField txtdtfim;
+    private javax.swing.JFormattedTextField txtdtinicio;
+    private javax.swing.JFormattedTextField txtvalor;
     // End of variables declaration//GEN-END:variables
 }

@@ -374,6 +374,7 @@ public class CidadeView extends javax.swing.JFrame {
             txtNome.setText("");
             txtCep.setText("");
             jcbUf.setSelectedIndex(0);
+            txtNome.grabFocus();
             
            //FORMATAR CEP
            Formatacao.reformatarCEP(txtCep);

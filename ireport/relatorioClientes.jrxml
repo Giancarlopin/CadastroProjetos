@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioClientes" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d0a6ed55-afd9-4ab0-be75-3ddd04fcab5c">
+	<property name="ireport.zoom" value="2.415765000000011"/>
+	<property name="ireport.x" value="236"/>
+	<property name="ireport.y" value="139"/>
+	<queryString language="SQL">
+		<![CDATA[select cl.*, c.nome as nmcidade
+from cidade c, clientes cl
+where c.codcidade = cl.codcidade]]>
+	</queryString>
+	<field name="codcliente" class="java.lang.Integer"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="cnpj_cpf" class="java.lang.String"/>
+	<field name="telefone" class="java.lang.String"/>
+	<field name="nmcidade" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="68" splitType="Stretch">
+			<staticText>
+				<reportElement x="19" y="23" width="555" height="40" uuid="c1a378e2-a123-4b96-b5ce-2c4a49681d99"/>
+				<textElement textAlignment="Center">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório Clientes]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="11" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="35" height="18" uuid="493767b2-bd6d-4bbd-9868-b715d45864d4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cód]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="2" width="151" height="20" uuid="34b4c591-17e5-4a76-8c53-dd80a66125d6"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="224" y="2" width="121" height="20" uuid="b4f8e7f5-2e49-47bb-91cb-3164a40be168"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPF/CNPJ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="2" width="100" height="20" uuid="40a1cc72-c8d7-4f83-b9f3-abb22324d851"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="2" width="100" height="20" uuid="f8e93073-4a62-408c-9cef-aefa8e8799f3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cidade]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-18" y="20" width="592" height="1" uuid="19e6f9c9-437e-4bfb-acd0-1c233e9edee6"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="4" width="35" height="20" uuid="7bcc4b87-6a4f-412c-9a50-9a2740b19b00"/>
+				<textFieldExpression><![CDATA[$F{codcliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="4" width="151" height="20" uuid="46b8f6f0-4bee-48ea-91d6-c4e71bf22729"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="224" y="4" width="121" height="20" uuid="ee277764-c7bf-47ef-87d2-78cd2e308af9"/>
+				<textFieldExpression><![CDATA[$F{cnpj_cpf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="345" y="4" width="100" height="20" uuid="b4fc5a0a-feb8-49e0-9569-f666dbe7247c"/>
+				<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="4" width="100" height="20" uuid="7d07e67e-8270-40f9-8b5b-083b97202a20"/>
+				<textFieldExpression><![CDATA[$F{nmcidade}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="24" width="555" height="1" uuid="e4828a87-4e2d-481c-bf02-5837ac9749e4"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="37" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
